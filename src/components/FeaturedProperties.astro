@@ -1,5 +1,5 @@
 ---
-import PropertyCard from './PropertyCard.astro';
+import PropertyGrid from './PropertyGrid.jsx';
 import { getFeaturedProperties } from '../lib/api';
 
 const properties = await getFeaturedProperties();
@@ -20,20 +20,9 @@ const properties = await getFeaturedProperties();
       </p>
     </div>
 
-    {/* Grid / Carousel */}
+    {/* Grid / Carousel (Animated) */}
     {properties && properties.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {properties.map((prop: any) => (
-          <PropertyCard
-            title={prop.title}
-            location={prop.location}
-            price={prop.price}
-            imageUrl={prop.imageUrl}
-            soulLabel={prop.soulLabel}
-            slug={prop.slug.current}
-          />
-        ))}
-      </div>
+      <PropertyGrid properties={properties} client:load />
     ) : (
       <div class="text-center py-12 border border-dashed border-brand-secondary/30 rounded-lg">
         <p class="text-brand-secondary">No hay propiedades publicadas aún.</p>
