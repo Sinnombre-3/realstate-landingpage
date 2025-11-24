@@ -1,0 +1,56 @@
+---
+import { getLandingPageData } from '../lib/api';
+
+const data = await getLandingPageData();
+
+// Fallback values in case Sanity is empty initially
+const heroTitle = data?.heroTitle || "Experiencia Inmobiliaria";
+const heroSubtitle = data?.heroSubtitle || "Descubre propiedades exclusivas con un servicio personalizado.";
+const ctaText = data?.ctaText || "Contáctanos";
+const ctaLink = data?.ctaLink || "/contacto";
+const videoUrl = data?.videoFile || data?.heroVideoUrl;
+---
+
+<section class="relative h-screen w-full overflow-hidden">
+  {/* Background Video */}
+  {videoUrl ? (
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      class="absolute top-0 left-0 w-full h-full object-cover -z-10"
+    >
+      <source src={videoUrl} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  ) : (
+    <div class="absolute top-0 left-0 w-full h-full bg-brand-dark -z-10 flex items-center justify-center">
+      <p class="text-white/50">No video configured</p>
+    </div>
+  )}
+
+  {/* Overlay */}
+  <div class="absolute top-0 left-0 w-full h-full bg-brand-black/40 -z-10"></div>
+
+  {/* Content */}
+  <div class="relative h-full container mx-auto px-6 flex flex-col justify-center items-center text-center">
+    <h1 class="text-5xl md:text-7xl font-serif text-white font-bold mb-6 tracking-tight drop-shadow-lg">
+      {heroTitle}
+    </h1>
+    
+    {heroSubtitle && (
+      <p class="text-lg md:text-2xl text-white/90 font-sans max-w-2xl mb-10 font-light leading-relaxed drop-shadow-md">
+        {heroSubtitle}
+      </p>
+    )}
+
+    <a
+      href={ctaLink}
+      class="group relative inline-flex items-center justify-center px-8 py-4 text-sm font-bold text-white transition-all duration-200 bg-brand-primary font-sans tracking-widest uppercase hover:bg-ui-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary"
+    >
+      <span>{ctaText}</span>
+      <div class="absolute inset-0 h-full w-full scale-0 rounded-sm transition-all duration-300 group-hover:scale-100 group-hover:bg-white/10"></div>
+    </a>
+  </div>
+</section>
