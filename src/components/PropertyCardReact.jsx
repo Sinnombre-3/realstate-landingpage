@@ -6,7 +6,7 @@ export default function PropertyCard({ title, location, price, imageUrl, soulLab
   }).format(price);
 
   return (
-    <a href={`/propiedades/${slug}`} className="group block relative overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-500">
+    <a href={`/propiedades/${slug}`} className="group block relative overflow-hidden bg-white shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out">
       {/* Image Container */}
       <div className="relative aspect-[4/5] overflow-hidden">
         <img

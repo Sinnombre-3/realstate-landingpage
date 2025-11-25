@@ -5,6 +5,7 @@ import sanity from "@sanity/astro";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://jules-realestate.demo', // Placeholder domain to fix Astro.site usage
   integrations: [
     react(),
     tailwind(),
